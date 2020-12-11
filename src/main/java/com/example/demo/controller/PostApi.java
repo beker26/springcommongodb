@@ -23,5 +23,8 @@ public interface PostApi {
 	public ResponseEntity<Post> findById(@PathVariable String id);
 	@GetMapping(value="/titlesearch")
 	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue="") String text);
-	
+	@GetMapping(value="/fullsearch")
+	public ResponseEntity<List<Post>> fullsearch(@RequestParam(value="text", defaultValue="") String text
+			,@RequestParam(value="minDate", defaultValue="") String minDate
+			,@RequestParam(value="maxDate", defaultValue="") String maxDate);
 }

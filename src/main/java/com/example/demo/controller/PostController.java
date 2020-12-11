@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,16 @@ public class PostController implements PostApi {
 	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue="") String text) {
 		text = URL.decodeParam(text);
 		List<Post> list = postService.findByTitle(text);
+		return ResponseEntity.ok().body(list);
+	}
+
+
+	@Override
+	public ResponseEntity<List<Post>> fullsearch(String text, String minDate, String maxDate) {
+		text = URL.decodeParam(text);
+		Date min = URL.convertDate(minDate, new Date(0L));
+		Date max = URL.convertDate(minDate, new Date());
+		List<Post> list = postService.fullSearch(text,min,max);
 		return ResponseEntity.ok().body(list);
 	}
 	
